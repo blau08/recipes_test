@@ -2,27 +2,20 @@ require("bundler/setup")
 Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 require "pry"
+
 get("/") do
   erb(:index)
 end
 
-# ActiveRecord::Base.establish_connection(ENV['postgres://vximxpeknhtqrl:7-4SCy44fc1ehnSwMSJRDIuoR7@ec2-23-23-188-252.compute-1.amazonaws.com:5432/da4q8pst35uv41'])
-
 get("/recipes") do
-  # recipe_id = params.fetch('recipe_id')
-  # @recipe = Recipe.find(recipe_id)
-  @recipes = Recipe.order('rating DESC')
-  # binding.pry
-
+  @recipes = Recipe.order('rating DESC, name ASC')
   erb(:recipes)
 end
 
 post("/recipe") do
   recipe = Recipe.create({name: params.fetch("name")})
-  @recipes = Recipe.order('rating DESC')
   erb(:recipes)
 end
-
 
 post("/instruction") do
   @recipe = Recipe.find(params.fetch("recipe_id").to_i)
@@ -42,12 +35,10 @@ end
 patch("/recipe/:id") do
   ingredient_ids = params.fetch("ingredient_ids")
   @recipe = Recipe.find(params.fetch("id").to_i())
-
   ingredient_ids.each() do |ingredient_id|
     ingredient = Ingredient.find(ingredient_id.to_i())
     @recipe.ingredients.push(ingredient)
   end
-
   @ingredients = Ingredient.all()
   erb(:recipe)
 end
@@ -125,7 +116,6 @@ end
 patch("/category/:id") do
   recipe_ids = params.fetch("recipe_ids")
   @category = Category.find(params.fetch("id").to_i())
-
   recipe_ids.each() do |recipe_id|
     recipe = Recipe.find(recipe_id.to_i())
     @category.recipes.push(recipe)

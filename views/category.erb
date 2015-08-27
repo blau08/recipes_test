@@ -4,8 +4,6 @@
     <li><%= recipe.name() %></li>
 <% end %>
 
-
-<br>
 <form action="/category/<%= @category.id %>" method="post">
   <input type="hidden" name="_method" value="patch">
   <% @recipes.each() do |recipe| %>
@@ -15,20 +13,16 @@
       </label>
     </div>
   <% end %>
-  <button type="submit">Add recipe</button>
+  <button type="submit" class="btn btn-primary">Add recipe</button>
 </form>
-
 <br>
+
 <form action="/category/<%=@category.id %>" method="post">
     <div class="form-group">
       <input type="hidden" name="_method" value="delete">
       <button class="btn btn-danger" name="delete" id="delete">Delete Category</button>
-    </div>
-</form>
 
-<form>
-  <br>
-    <div class="form-group">
       <a href="/" class="btn btn-info" role="button">Home</a>
+
     </div>
 </form>
