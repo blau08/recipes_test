@@ -1,0 +1,82 @@
+<h1><%= @recipe.name() %></h1>
+<h4>Rating:
+
+    <% if @recipe.rating() == 1 %>
+    &#9733;
+<% elsif @recipe.rating() == 2 %>
+&#9733;&#9733;
+<% elsif @recipe.rating() == 3 %>
+&#9733;&#9733;&#9733;
+<% elsif @recipe.rating() == 4 %>
+``&#9733;&#9733;&#9733;&#9733;
+<% elsif @recipe.rating() == 5 %>
+&#9733;&#9733;&#9733;&#9733;&#9733;
+<% end %>
+<br><br>
+Categories:
+<br>
+<br>
+<% @recipe.categories.each() do |category| %>
+    <li><%= category.name() %></li>
+<% end %>
+
+</h4>
+<br>
+<h4>Ingredients</h4>
+<% @recipe.ingredients.each() do |ingredient| %>
+    <li><%= ingredient.name() %></li>
+<% end %>
+<hr>
+
+
+<form action="/recipe/<%= @recipe.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <% @ingredients.each() do |ingredient| %>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="ingredient_ids[]" value="<%= ingredient.id() %>"><%= ingredient.name() %>
+      </label>
+    </div>
+  <% end %>
+  <button type="submit">Add ingredients</button>
+</form>
+<hr>
+<h4>Instructions</h4>
+<h5><%= @recipe.instructions %></h5>
+<h4>Add instructions:</h4>
+<form action="/instruction" method="post">
+  <input id="recipe_id" name="recipe_id" type="hidden" value="<%= @recipe.id() %>">
+
+  <label for="instruction">Instruction:</label>
+  <input id="instruction" name="instruction" type="text">
+
+  <button type="submit">Add Instructions</button>
+</form>
+<hr>
+<form action="/recipe_rating" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <input id="recipe_id" name="recipe_id" type="hidden" value="<%= @recipe.id() %>">
+  <label for="rating">Select a rating</label>
+  <select id='rating' name='rating' type='text'>
+      <option value="1"> &#9733;</option>
+      <option value="2"> &#9733;&#9733;</option>
+      <option value="3"> &#9733;&#9733;&#9733;</option>
+      <option value="4"> &#9733;&#9733;&#9733;&#9733;</option>
+      <option value="5"> &#9733;&#9733;&#9733;&#9733;&#9733;</option>
+  </select>
+  <button type="submit">Add rating</button>
+</form>
+<br>
+<form action="/recipe/<%=@recipe.id %>" method="post">
+    <div class="form-group">
+      <input type="hidden" name="_method" value="delete">
+      <button class="btn btn-danger" name="delete" id="delete">Delete</button>
+    </div>
+</form>
+
+<form>
+  <br>
+    <div class="form-group">
+      <a href="/" class="btn btn-info" role="button">Home</a>
+    </div>
+</form>
