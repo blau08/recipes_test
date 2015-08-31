@@ -1,7 +1,11 @@
 development:
   adapter: postgresql
   database: recipe_development
+  # user: postgres
+  # password: secret
 
 test:
   adapter: postgresql
   database: recipe_test
+  # user: postgres
+  # password: secret

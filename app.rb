@@ -14,7 +14,7 @@ end
 
 post("/recipe") do
   recipe = Recipe.create({name: params.fetch("name")})
-  erb(:recipes)
+  redirect('/recipes')
 end
 
 post("/instruction") do
