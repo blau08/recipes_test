@@ -1,0 +1,20 @@
+App Name: Recipes | Brian Lau | 8/31/2015
+
+Recipes is an application that allows you to organize recipes, ingredients, and categories.
+
+Application Instructions:
+1. Visit the website https://recipes-list.herokuapp.com/
+2. Add a recipe
+3. Add ingredients and categories
+4. Add ingredients and categories to recipe
+5. Enjoy your new recipes app.
+
+Set Up Instructions:
+1. git clone https://github.com/blau08/recipes_test.git
+2. bundle
+3. rake db:create
+4. rake db:migrate
+5. ruby app.rb
+
+About:
+This product uses a postgresql database to handle and save the data that is entered. It is deployed using Heroku and uses Ruby, ActiveRecord, HTML, and CSS.
