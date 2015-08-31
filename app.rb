@@ -113,17 +113,6 @@ patch("/category/:id") do
   erb(:category)
 end
 
-patch("/category/:id") do
-  recipe_ids = params.fetch("recipe_ids")
-  @category = Category.find(params.fetch("id").to_i())
-  recipe_ids.each() do |recipe_id|
-    recipe = Recipe.find(recipe_id.to_i())
-    @category.recipes.push(recipe)
-  end
-  @recipes = Recipe.all()
-  erb(:category)
-end
-
 delete('/category/:id') do
   category_id = params.fetch("id").to_i
   category = Category.find(category_id)

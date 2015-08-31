@@ -1,7 +1,7 @@
 <h1><%= @category.name() %></h1>
 <hr>
 <% @category.recipes.each() do |recipe| %>
-    <li><%= recipe.name() %></li>
+    <li><a href="/recipe/<%= recipe.id() %>"><%= recipe.name() %></a></li>
 <% end %>
 
 <form action="/category/<%= @category.id %>" method="post">
